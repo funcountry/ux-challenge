@@ -44,9 +44,7 @@ You'll be implementing a single screen design from a Figma mockup (link to be pr
    See [troubleshooting.md](./troubleshooting.md) if you encounter any issues
 
 5. **Complete the challenge:**
-   - Either:
-     - Replace the Welcome screen with your Figma implementation, OR
-     - Add a new screen to the app with a way to navigate from the Welcome screen
+   - Replace the Welcome screen with your Figma implementation
    - The existing Welcome screen shows sample instructions when you click "Get Started"
    - Focus on matching the design as closely as possible
 

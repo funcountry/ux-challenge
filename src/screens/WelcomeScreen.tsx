@@ -151,14 +151,14 @@ export default function WelcomeScreen() {
               <View style={styles.instructionCard}>
                 <Text style={styles.instructionNumber}>1</Text>
                 <Text style={styles.instructionText}>
-                  Review the Figma design provided by your interviewer
+                  Review the Figma design provided in the email
                 </Text>
               </View>
 
               <View style={styles.instructionCard}>
                 <Text style={styles.instructionNumber}>2</Text>
                 <Text style={styles.instructionText}>
-                  Implement the design as a React Native screen
+                  Implement the design as React Native screen(s)
                 </Text>
               </View>
 
