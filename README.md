@@ -2,57 +2,58 @@
 
 Welcome to the UX Engineering Challenge! This is a minimal React Native project set up for you to implement a screen design.
 
-## Initial Setup
-
-### Generate Placeholder Assets
-First, you'll need to create the required app icons. We've provided a script to help:
-
-```bash
-node scripts/generate-placeholder-assets.js
-```
-
-This will create placeholder SVG files that you'll need to convert to PNG format. You can use any online SVG to PNG converter or design tool to create:
-- `icon.png` (1024x1024) - App icon
-- `splash.png` (1284x2778) - Splash screen  
-- `adaptive-icon.png` (432x432) - Android adaptive icon
-- `favicon.png` (48x48) - Web favicon
-
-Alternatively, you can create your own simple icons using any design tool.
-
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v20 or later)
+- Node.js (v18 or later, v20 recommended)
 - npm or yarn
-- Xcode (for iOS development)
-- CocoaPods
+- **For iOS development (Mac only):**
+  - Xcode
+  - CocoaPods
+- **For Android development:**
+  - Android Studio (optional)
+- **All platforms:**
+  - Expo Go app on your phone (optional)
 
-### Installation
+### Platform Notes
+- **macOS**: Full iOS and Android support
+- **Windows/Linux**: Web and Android only (no iOS simulator)
+- See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for platform-specific guidance
 
-1. Install dependencies:
+### Quick Start
+
+1. Install dependencies (this will also set up placeholder assets automatically):
 ```bash
 npm install
 ```
 
-2. Install iOS dependencies (if the ios folder exists):
-```bash
-cd ios && pod install && cd ..
-```
-
-Note: If you need to regenerate the iOS folder, run:
-```bash
-npx expo prebuild --platform ios
-```
-
-3. Start the development server:
+2. Start the development server:
 ```bash
 npm start
 ```
 
-4. Run on iOS simulator:
+3. Choose your platform:
+
+**iOS Simulator (Mac only):**
 ```bash
 npm run ios
 ```
+
+**Web Browser (All platforms):**
+```bash
+npm start
+# Then press 'w'
+```
+
+**Android Emulator:**
+```bash
+npm run android
+```
+
+**Physical Device:**
+- Install Expo Go app
+- Run `npm start`
+- Scan QR code
 
 ## Project Structure
 

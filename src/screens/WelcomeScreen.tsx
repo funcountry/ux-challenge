@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -10,6 +11,7 @@ import Animated, {
   Easing,
   runOnJS,
 } from 'react-native-reanimated';
+import { colors, spacing, typography, shadows, borderRadius } from '../constants/theme';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -25,7 +27,7 @@ export default function WelcomeScreen() {
   const handleGetStarted = () => {
     'worklet';
     // Move to top with 60px from top of screen
-    const targetY = 60 - (SCREEN_HEIGHT * 0.4);
+    const targetY = 60 - (SCREEN_HEIGHT * 0.35);
     translateY.value = withSpring(targetY, {
       damping: 20,
       stiffness: 90,
@@ -67,7 +69,7 @@ export default function WelcomeScreen() {
         { scale: titleScale.value }
       ],
       opacity: opacity.value,
-      backgroundColor: isMoving ? '#f5f5f5' : 'transparent',
+      backgroundColor: isMoving ? colors.background : 'transparent',
       paddingVertical: isMoving ? 10 : 0,
       paddingHorizontal: isMoving ? 20 : 0,
       width: '100%',
@@ -104,6 +106,12 @@ export default function WelcomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={[colors.background, '#0e1625', colors.background]}
+        style={StyleSheet.absoluteFillObject}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      />
       <Animated.View style={[styles.welcomeContainer, welcomeAnimatedStyle]}>
         <Text style={styles.title}>Welcome!</Text>
         <Animated.Text style={[styles.subtitle, subtitleAnimatedStyle]}>
@@ -116,12 +124,18 @@ export default function WelcomeScreen() {
           <Animated.View style={[styles.buttonContainer, buttonAnimatedStyle]}>
             <Pressable
               style={({ pressed }) => [
-                styles.button,
                 pressed && styles.buttonPressed,
               ]}
               onPress={handleGetStarted}
             >
-              <Text style={styles.buttonText}>Get Started</Text>
+              <LinearGradient
+                colors={[colors.primary, colors.primaryDark]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Get Started</Text>
+              </LinearGradient>
             </Pressable>
           </Animated.View>
         )}
@@ -177,11 +191,11 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   welcomeContainer: {
     position: 'absolute',
-    top: SCREEN_HEIGHT * 0.4,
+    top: SCREEN_HEIGHT * 0.35,
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -191,93 +205,87 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: spacing.lg,
   },
   title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
+    fontSize: typography.fontSize.display,
+    fontWeight: typography.fontWeight.heavy,
+    color: colors.text,
+    marginBottom: spacing.md,
+    letterSpacing: -1,
   },
   subtitle: {
-    fontSize: 20,
-    color: '#666',
+    fontSize: typography.fontSize.xl,
+    fontWeight: typography.fontWeight.medium,
+    color: colors.textSecondary,
+    letterSpacing: 0.5,
+    marginBottom: spacing.xl,
   },
   buttonContainer: {
     alignItems: 'center',
-    marginTop: 100,
+    marginTop: spacing.xxl,
   },
   button: {
-    backgroundColor: '#4A90E2',
-    paddingHorizontal: 40,
-    paddingVertical: 16,
-    borderRadius: 30,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.round,
+    ...shadows.medium,
+    overflow: 'hidden',
   },
   buttonPressed: {
-    backgroundColor: '#357ABD',
     transform: [{ scale: 0.98 }],
+    opacity: 0.9,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600',
+    color: colors.text,
+    fontSize: typography.fontSize.lg,
+    fontWeight: typography.fontWeight.bold,
+    letterSpacing: 0.5,
   },
   instructionsContainer: {
     flex: 1,
     paddingTop: 100,
   },
   scrollContent: {
-    paddingBottom: 40,
+    paddingBottom: spacing.xxl,
   },
   instructionTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 30,
+    fontSize: typography.fontSize.xxl,
+    fontWeight: typography.fontWeight.bold,
+    color: colors.text,
+    marginBottom: spacing.xl,
     textAlign: 'center',
+    letterSpacing: -0.5,
   },
   instructionCard: {
     flexDirection: 'row',
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 12,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    elevation: 2,
+    backgroundColor: colors.surface,
+    padding: spacing.lg,
+    borderRadius: borderRadius.large,
+    marginBottom: spacing.md,
+    ...shadows.medium,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   instructionNumber: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4A90E2',
-    marginRight: 16,
+    fontSize: typography.fontSize.xl,
+    fontWeight: typography.fontWeight.bold,
+    color: colors.accent,
+    marginRight: spacing.md,
     width: 30,
   },
   instructionText: {
     flex: 1,
-    fontSize: 16,
-    color: '#444',
-    lineHeight: 22,
+    fontSize: typography.fontSize.md,
+    color: colors.textSecondary,
+    lineHeight: 24,
   },
   instructionFooter: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: typography.fontSize.md,
+    color: colors.textMuted,
     textAlign: 'center',
-    marginTop: 30,
-    lineHeight: 24,
+    marginTop: spacing.xl,
+    lineHeight: 26,
   },
 });
