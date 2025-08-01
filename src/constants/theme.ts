@@ -10,7 +10,7 @@ export const colors = {
   accent: '#2AD6FF', // Cyan accent
 
   // Text colors
-  text: '#ffffff',
+  text: '#FCFBF8',
   textSecondary: '#b0b0c0',
   textMuted: '#808090',
 

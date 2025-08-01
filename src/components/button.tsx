@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   },
   buttonTextMedium: {
     fontSize: typography.fontSize.md,
+    fontWeight: typography.fontWeight.bold,
   },
   buttonTextLarge: {
     fontSize: typography.fontSize.lg,
