@@ -31,20 +31,25 @@ export default function WelcomeScreen() {
     return (
       <View style={styles.container}>
         <View style={styles.instructionContainer}>
-          {/* Left side element - could be icon or button */}
           <View style={styles.leftElement}>
-            {/* Add your left element here, e.g., back button */}
           </View>
 
           <Text style={styles.instructionsText}>
             ux engineering challenge
           </Text>
 
-          {/* Right side element - could be icon or button */}
           <View style={styles.rightElement}>
-            {/* Add your right element here, e.g., menu button */}
           </View>
         </View>
+
+        {/* Arch and grey section */}
+        <View style={styles.middleSection}>
+          <View style={styles.archContainer}>
+            <View style={styles.archShape} />
+          </View>
+          <View style={styles.greySection} />
+        </View>
+
         <View style={styles.buttonContainer}>
           <Button title="Primary Button" variant="primary" onPress={handleGoBack}/>
           <Button title="Disabled Button" disabled />
@@ -56,39 +61,49 @@ export default function WelcomeScreen() {
 
    const WelcomeComponent = () => {
     return (
-      <SafeAreaView style={styles.container}>
-      {/* Logo at top */}
-      <View style={styles.logoContainer}>
-        <WelcomeLogo width={97} height={32} />
-      </View>
+      <View style={styles.welcomeContainer}>
+        {/* Logo at top */}
+        <View style={styles.logoContainer}>
+          <WelcomeLogo width={97} height={32} />
+        </View>
 
-      {/* Text content in middle */}
-      <View style={styles.textContainer}>
-        <Text style={styles.dateText}>{getCurrentDate()}</Text>
-        <Text style={styles.welcomeText}>Welcome!</Text>
-        <Text style={styles.challengeText}>UX Engineering Challenge</Text>
-      </View>
+        {/* Text content in middle */}
+        <View style={styles.textContainer}>
+          <Text style={styles.dateText}>{getCurrentDate()}</Text>
+          <Text style={styles.welcomeText}>Welcome!</Text>
+          <Text style={styles.challengeText}>UX Engineering Challenge</Text>
+        </View>
 
-      {/* Button at bottom */}
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Get Started"
-          onPress={handleGetStarted} />
+        {/* Button at bottom */}
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Get Started"
+            size="large"
+            onPress={handleGetStarted} />
+        </View>
       </View>
-    </SafeAreaView>
     )
    }
 
-  return showInstructions ? InstructionsComponent() : WelcomeComponent()
+  return (
+    <SafeAreaView style={styles.container}>
+      {showInstructions ? InstructionsComponent() : WelcomeComponent()}
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.cobalt[900],
+    paddingTop: spacing.lg,
+    paddingBottom: spacing.lg,
+  },
+  welcomeContainer: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: spacing.xxl,
-    paddingBottom: spacing.xxl,
+
   },
   logoContainer: {
     alignItems: 'center',
@@ -105,12 +120,13 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   buttonContainer: {
+    width: '100%',
+    paddingHorizontal: spacing.md, // 16px margins on left and right
     alignItems: 'center',
     gap: 16, // 16px spacing between buttons
   },
   dateText: {
-    fontFamily: typography.fontFamily.blinker,
-    fontWeight: typography.fontWeight.bold, // 700 weight
+    fontFamily: 'Blinker_700Bold',
     fontSize: typography.fontSize.md,
     lineHeight: 24,
     letterSpacing: 0.64, // 4% of 16px
@@ -120,16 +136,14 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   welcomeText: {
-    fontFamily: typography.fontFamily.blinker,
-    fontWeight: typography.fontWeight.bold, // 700 weight
+    fontFamily: 'Blinker_700Bold',
     fontSize: typography.fontSize.xxl,
     color: colors.text,
     marginBottom: spacing.sm,
     letterSpacing: -1,
   },
   challengeText: {
-    fontFamily: typography.fontFamily.blinker,
-    fontWeight: typography.fontWeight.regular, // 400 weight
+    fontFamily: 'Blinker_400Regular',
     fontSize: typography.fontSize.lg,
     color: colors.textSecondary,
     letterSpacing: 0.5,
@@ -144,12 +158,32 @@ const styles = StyleSheet.create({
   },
   instructionsText: {
     color: colors.text,
-    fontFamily: typography.fontFamily.blinker,
-    fontWeight: typography.fontWeight.bold,
+    fontFamily: 'Blinker_700Bold',
     fontSize: typography.fontSize.md,
     textAlign: 'center',
     letterSpacing: 0.64,
     textTransform: 'uppercase',
     flex: 1, // Takes remaining space, centers the text
+  },
+  middleSection: {
+    flex: 1,
+    marginTop: 64, // 64px below the challenge text
+  },
+  archContainer: {
+    height: 120, // Adjust based on desired arch size
+    overflow: 'hidden',
+  },
+  archShape: {
+    width: '200%',
+    height: 240, // Double the arch container height for proper curve
+    borderRadius: 120,
+    backgroundColor: '#6B6B6B', // Grey color for the arch
+    alignSelf: 'center',
+    marginTop: -120, // Position to show only bottom half of circle
+  },
+  greySection: {
+    flex: 1,
+    backgroundColor: '#6B6B6B', // Same grey color
+    marginBottom: spacing.lg, // Space above buttons
   },
 })

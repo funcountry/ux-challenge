@@ -63,27 +63,27 @@ export default function Button({ title, variant = 'primary', size = 'medium', di
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
+    borderRadius: spacing.xs,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonSmall: {
     width: 'auto', // Will be defined later
     height: 36,
-    paddingHorizontal: 12,
-    gap: 8,
+    paddingHorizontal: spacing.sm,
+    gap: spacing.xs,
   },
   buttonMedium: {
-    width: 361,
-    height: 52,
-    paddingHorizontal: 16,
-    gap: 12,
+    width: '100%',
+    height: 44,
+    paddingHorizontal: spacing.md,
+    gap: spacing.sm,
   },
   buttonLarge: {
-    width: 'auto', // Will be defined later
+    width: '100%',
     height: 52,
-    paddingHorizontal: 20,
-    gap: 16,
+    paddingHorizontal: spacing.md,
+    gap: spacing.md,
   },
   buttonPrimary: {
     backgroundColor: colors.cyan[300],
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     shadowColor: colors.cyan[700],
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: spacing.xs, // 4px
     },
     shadowOpacity: 1,
     shadowRadius: 0,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   buttonText: {
-    fontWeight: typography.fontWeight.bold,
+    fontFamily: 'Blinker_700Bold', // Use the specific bold font family
     color: colors.cobalt[900],
     textAlign: 'center',
   },
@@ -138,13 +138,12 @@ const styles = StyleSheet.create({
   },
   buttonTextMedium: {
     fontSize: typography.fontSize.md,
-    fontWeight: typography.fontWeight.bold,
   },
   buttonTextLarge: {
-    fontSize: typography.fontSize.lg,
+    fontSize: typography.fontSize.mlg,
   },
   buttonTextSecondary: {
-    color: '#FCFBF8',
+    color: colors.text,
   },
   buttonTextDisabled: {
     color: colors.cobalt[200],
