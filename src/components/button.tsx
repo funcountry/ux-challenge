@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: spacing.xs,
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: typography.fontSize.mlg,
   },
   buttonSmall: {
     width: 'auto', // Will be defined later

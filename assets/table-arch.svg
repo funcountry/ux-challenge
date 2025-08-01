@@ -1,0 +1,6 @@
+<svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Border (outer ellipse) - vertical orientation -->
+  <ellipse cx="200" cy="300" rx="300" ry="300" fill="#384156"/>
+  <!-- Table surface (inner ellipse) - vertical orientation -->
+  <ellipse cx="200" cy="300" rx="284" ry="284" fill="#2A2F3A"/>
+</svg>

@@ -2,6 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from '../components/button';
 import WelcomeLogo from '../../assets/welcome-logo.svg';
+import TableArch from '../../assets/table-arch.svg';
 import { colors, typography, spacing } from '../constants/theme';
 import { useState } from 'react';
 
@@ -42,12 +43,12 @@ export default function WelcomeScreen() {
           </View>
         </View>
 
-        {/* Arch and grey section */}
+        {/* Table section */}
         <View style={styles.middleSection}>
-          <View style={styles.archContainer}>
-            <View style={styles.archShape} />
+          <View style={styles.tableContainer}>
+            <TableArch width="100%" height={120} style={styles.tableArch} />
           </View>
-          <View style={styles.greySection} />
+          <View style={styles.tableBottom} />
         </View>
 
         <View style={styles.buttonContainer}>
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.lg,
-    gap: spacing.md,
+    paddingVertical: 2, // Reduced from spacing.xs (4px) to 2px
   },
   buttonContainer: {
     width: '100%',
@@ -167,23 +168,25 @@ const styles = StyleSheet.create({
   },
   middleSection: {
     flex: 1,
-    marginTop: 64, // 64px below the challenge text
+    marginTop: 32, // Reduced from 64px to 32px
+    backgroundColor: colors.cobalt[900], // Same as screen background
   },
-  archContainer: {
-    height: 120, // Adjust based on desired arch size
+  tableContainer: {
+    height: 120, // Height showing above the cut-off
     overflow: 'hidden',
+    backgroundColor: colors.cobalt[900],
+    position: 'relative',
+    justifyContent: 'flex-end', // Align to show bottom of arch
   },
-  archShape: {
-    width: '200%',
-    height: 240, // Double the arch container height for proper curve
-    borderRadius: 120,
-    backgroundColor: '#6B6B6B', // Grey color for the arch
-    alignSelf: 'center',
-    marginTop: -120, // Position to show only bottom half of circle
+  tableArch: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
-  greySection: {
+  tableBottom: {
     flex: 1,
-    backgroundColor: '#6B6B6B', // Same grey color
+    backgroundColor: colors.cobalt[700], // Changed to match arch table surface
     marginBottom: spacing.lg, // Space above buttons
   },
 })
