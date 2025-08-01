@@ -5,17 +5,96 @@ import WelcomeLogo from '../../assets/welcome-logo.svg';
 import Table from '../../assets/Table.svg';
 import { colors, typography, spacing } from '../constants/theme';
 import { useState } from 'react';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSpring,
+  Easing,
+  runOnJS,
+} from 'react-native-reanimated';
 
 export default function WelcomeScreen() {
   const [showInstructions, setShowInstructions] = useState(false);
   const { width: screenWidth } = Dimensions.get('window');
 
+  // Animation values
+  const logoTranslateY = useSharedValue(0);
+  const logoOpacity = useSharedValue(1);
+  const textOpacity = useSharedValue(1);
+  const textScale = useSharedValue(1);
+  const buttonOpacity = useSharedValue(1);
+  const instructionsOpacity = useSharedValue(0);
+
   const handleGetStarted = () => {
-    setShowInstructions(true);
+    // Logo flies up and off screen
+    logoTranslateY.value = withSpring(-200, {
+      damping: 15,
+      stiffness: 100,
+    });
+    logoOpacity.value = withTiming(0, {
+      duration: 400,
+      easing: Easing.in(Easing.quad),
+    });
+
+    // Text fades out and shrinks
+    textOpacity.value = withTiming(0, {
+      duration: 200,
+      easing: Easing.out(Easing.quad),
+    });
+    textScale.value = withTiming(0.8, {
+      duration: 200,
+      easing: Easing.out(Easing.quad),
+    });
+
+    // Button fades out
+    buttonOpacity.value = withTiming(0, {
+      duration: 100,
+      easing: Easing.out(Easing.quad),
+    });
+
+    // Instructions fade in after a delay
+    instructionsOpacity.value = withTiming(1, {
+      duration: 200,
+      easing: Easing.inOut(Easing.cubic),
+    }, () => {
+      runOnJS(setShowInstructions)(true);
+    });
   }
 
   const handleGoBack = () => {
-    setShowInstructions(false);
+    // Hide instructions first
+    instructionsOpacity.value = withTiming(0, {
+      duration: 200,
+      easing: Easing.out(Easing.quad),
+    }, () => {
+      runOnJS(setShowInstructions)(false);
+
+      logoTranslateY.value = withSpring(0, {
+        damping: 20,
+        stiffness: 90,
+      });
+      logoOpacity.value = withTiming(1, {
+        duration: 100,
+        easing: Easing.out(Easing.quad),
+      });
+
+      // Text fades back in and scales back up
+      textOpacity.value = withTiming(1, {
+        duration: 300,
+        easing: Easing.out(Easing.quad),
+      });
+      textScale.value = withTiming(1, {
+        duration: 300,
+        easing: Easing.out(Easing.quad),
+      });
+
+      // Button fades back in
+      buttonOpacity.value = withTiming(1, {
+        duration: 300,
+        easing: Easing.out(Easing.quad),
+      });
+    });
   }
 
   // Get current date in the format "Friday, August 1"
@@ -29,9 +108,36 @@ export default function WelcomeScreen() {
     return today.toLocaleDateString('en-US', options);
   };
 
+  // Animated styles
+  const logoAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: logoTranslateY.value }],
+      opacity: logoOpacity.value,
+    };
+  });
+
+  const textAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: textOpacity.value,
+      transform: [{ scale: textScale.value }],
+    };
+  });
+
+  const instructionsAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: instructionsOpacity.value,
+    };
+  });
+
+  const buttonAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: buttonOpacity.value,
+    };
+  });
+
    const InstructionsComponent = () => {
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, instructionsAnimatedStyle]}>
         <View style={styles.instructionContainer}>
           <View style={styles.leftElement}>
           </View>
@@ -57,32 +163,31 @@ export default function WelcomeScreen() {
           <Button title="Disabled Button" disabled />
           <Button title="Secondary Button" variant="secondary" />
         </View>
-      </View>
+      </Animated.View>
     )
    }
 
    const WelcomeComponent = () => {
     return (
       <View style={styles.welcomeContainer}>
-        {/* Logo at top */}
-        <View style={styles.logoContainer}>
+        <Animated.View style={[styles.logoContainer, logoAnimatedStyle]}>
           <WelcomeLogo width={97} height={32} />
-        </View>
+        </Animated.View>
 
         {/* Text content in middle */}
-        <View style={styles.textContainer}>
+        <Animated.View style={[styles.textContainer, textAnimatedStyle]}>
           <Text style={styles.dateText}>{getCurrentDate()}</Text>
           <Text style={styles.welcomeText}>Welcome!</Text>
           <Text style={styles.challengeText}>UX Engineering Challenge</Text>
-        </View>
+        </Animated.View>
 
         {/* Button at bottom */}
-        <View style={styles.buttonContainer}>
+        <Animated.View style={[styles.buttonContainer, buttonAnimatedStyle]}>
           <Button
             title="Get Started"
             size="large"
             onPress={handleGetStarted} />
-        </View>
+        </Animated.View>
       </View>
     )
    }
