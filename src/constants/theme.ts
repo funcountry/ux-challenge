@@ -3,31 +3,42 @@ export const colors = {
   background: '#1a1a2e',
   surface: '#2d2d44',
   cardHighlight: '#3d3d5c',
-  
+
   // Primary colors
   primary: '#4A90E2', // Keeping the blue from our splash
   primaryDark: '#357ABD',
   accent: '#2AD6FF', // Cyan accent
-  
+
   // Text colors
   text: '#ffffff',
   textSecondary: '#b0b0c0',
   textMuted: '#808090',
-  
+
   // UI colors
   success: '#3FA54D',
   successHover: '#42B75A',
   error: '#FF4D4F',
   warning: '#FFD700',
-  
+
   // Borders and dividers
   border: '#3d3d5c',
   divider: '#2A2D38',
-  
+
   // Special colors
   gold: '#FFD700',
   orange: '#f4511e',
   teal: '#22C6F7',
+
+  // Color scales
+  cyan: {
+    300: '#5BD3F5',
+    700: '#0D89AB',
+  },
+  cobalt: {
+    200: '#7785A6',
+    500: '#384156',
+    900: '#181c25',
+  },
 };
 
 export const spacing = {
