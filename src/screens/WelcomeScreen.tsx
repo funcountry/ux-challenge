@@ -209,14 +209,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.fontSize.display,
-    fontWeight: typography.fontWeight.heavy,
+    fontFamily: 'Blinker_700Bold',
     color: colors.text,
     marginBottom: spacing.md,
     letterSpacing: -1,
   },
   subtitle: {
     fontSize: typography.fontSize.xl,
-    fontWeight: typography.fontWeight.medium,
+    fontFamily: 'Blinker_400Regular',
     color: colors.textSecondary,
     letterSpacing: 0.5,
     marginBottom: spacing.xl,
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: colors.text,
     fontSize: typography.fontSize.lg,
-    fontWeight: typography.fontWeight.bold,
+    fontFamily: 'Blinker_700Bold',
     letterSpacing: 0.5,
   },
   instructionsContainer: {
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   },
   instructionTitle: {
     fontSize: typography.fontSize.xxl,
-    fontWeight: typography.fontWeight.bold,
+    fontFamily: 'Blinker_700Bold',
     color: colors.text,
     marginBottom: spacing.xl,
     textAlign: 'center',
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
   },
   instructionNumber: {
     fontSize: typography.fontSize.xl,
-    fontWeight: typography.fontWeight.bold,
+    fontFamily: 'Blinker_700Bold',
     color: colors.accent,
     marginRight: spacing.md,
     width: 30,
