@@ -2,6 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from '../components/button';
 import WelcomeLogo from '../../assets/welcome-logo.svg';
+import { colors, typography, spacing } from '../constants/theme';
 
 export default function WelcomeScreen() {
   const handleGetStarted = () => {
@@ -23,7 +24,7 @@ export default function WelcomeScreen() {
     <SafeAreaView style={styles.container}>
       {/* Logo at top */}
       <View style={styles.logoContainer}>
-        <WelcomeLogo width={200} height={100} />
+        <WelcomeLogo width={97} height={32} />
       </View>
 
       {/* Text content in middle */}
@@ -46,42 +47,45 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0e1625',
+    backgroundColor: colors.background,
+    justifyContent: 'space-between',
+    paddingTop: spacing.xxl,
+    paddingBottom: spacing.xxl,
   },
   logoContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 40,
   },
   textContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: spacing.lg,
   },
   buttonContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 40,
   },
   dateText: {
-    fontSize: 16,
-    color: '#b0b0c0',
-    marginBottom: 8,
+    fontFamily: typography.fontFamily.blinker,
+    fontWeight: typography.fontWeight.bold, // 700 weight
+    fontSize: typography.fontSize.md,
+    lineHeight: 24,
+    letterSpacing: 0.64, // 4% of 16px
+    textTransform: 'uppercase',
+    fontVariant: ['lining-nums', 'tabular-nums'],
+    color: colors.cyan[300],
+    marginBottom: spacing.sm,
   },
   welcomeText: {
-    fontSize: 48,
-    fontWeight: '800',
-    color: '#ffffff',
-    marginBottom: 8,
+    fontFamily: typography.fontFamily.blinker,
+    fontWeight: typography.fontWeight.bold, // 700 weight
+    fontSize: typography.fontSize.xxl,
+    color: colors.text,
+    marginBottom: spacing.sm,
     letterSpacing: -1,
   },
   challengeText: {
-    fontSize: 20,
-    fontWeight: '500',
-    color: '#b0b0c0',
+    fontFamily: typography.fontFamily.blinker,
+    fontWeight: typography.fontWeight.regular, // 400 weight
+    fontSize: typography.fontSize.lg,
+    color: colors.textSecondary,
     letterSpacing: 0.5,
   },
 })

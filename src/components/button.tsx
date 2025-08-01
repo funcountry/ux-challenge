@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   buttonMedium: {
     width: 361,
-    height: 44,
+    height: 52,
     paddingHorizontal: 16,
     gap: 12,
   },
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   buttonText: {
-    fontWeight: typography.fontWeight.semibold,
+    fontWeight: typography.fontWeight.bold,
     color: colors.cobalt[900],
     textAlign: 'center',
   },

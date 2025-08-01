@@ -52,9 +52,11 @@ export const spacing = {
 
 export const typography = {
   fontFamily: {
-    regular: 'System',
-    medium: 'System',
-    bold: 'System',
+    regular: 'Blinker',
+    medium: 'Blinker',
+    bold: 'Blinker',
+    blinker: 'Blinker',
+    blinkerBold: 'Blinker', // Using same family name, weight handled by fontWeight
   },
   fontSize: {
     xs: 12,
@@ -68,10 +70,10 @@ export const typography = {
   },
   fontWeight: {
     regular: '400' as const,
-    medium: '500' as const,
-    semibold: '600' as const,
+    medium: '400' as const, // Using 400 since 500 isn't available in Blinker
+    semibold: '700' as const, // Using 700 since 600 isn't available
     bold: '700' as const,
-    heavy: '800' as const,
+    heavy: '700' as const, // Using 700 since 800 isn't available
   },
 };
 
