@@ -1,22 +1,20 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import Button from '../components/button';
+import Button from '../components/Button';
 import WelcomeLogo from '../../assets/welcome-logo.svg';
-import Table from '../../assets/Table.svg';
+import Table from '../../assets/table.svg';
 import { colors, typography, spacing } from '../constants/theme';
 import { useState } from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  withSpring,
   Easing,
   runOnJS,
 } from 'react-native-reanimated';
 
 export default function WelcomeScreen() {
   const [showInstructions, setShowInstructions] = useState(false);
-  const { width: screenWidth } = Dimensions.get('window');
 
   // Animation values
   const logoOpacity = useSharedValue(1);
@@ -25,25 +23,21 @@ export default function WelcomeScreen() {
   const instructionsOpacity = useSharedValue(0);
 
   const handleGetStarted = () => {
-    // Simple fade out for logo
     logoOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     });
 
-    // Text fades out
     textOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     });
 
-    // Button fades out
     buttonOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     });
 
-    // Instructions fade in
     instructionsOpacity.value = withTiming(1, {
       duration: 200,
       easing: Easing.in(Easing.quad),
@@ -53,26 +47,22 @@ export default function WelcomeScreen() {
   }
 
   const handleGoBack = () => {
-    // Hide instructions
     instructionsOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     }, () => {
       runOnJS(setShowInstructions)(false);
 
-      // Simple fade in for logo
       logoOpacity.value = withTiming(1, {
         duration: 200,
         easing: Easing.in(Easing.quad),
       });
 
-      // Text fades back in
       textOpacity.value = withTiming(1, {
         duration: 200,
         easing: Easing.in(Easing.quad),
       });
 
-      // Button fades back in
       buttonOpacity.value = withTiming(1, {
         duration: 200,
         easing: Easing.in(Easing.quad),
@@ -91,7 +81,6 @@ export default function WelcomeScreen() {
     return today.toLocaleDateString('en-US', options);
   };
 
-  // Animated styles
   const logoAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: logoOpacity.value,
@@ -131,8 +120,7 @@ export default function WelcomeScreen() {
           </View>
         </View>
 
-        {/* Table section */}
-        <View style={styles.middleSection}>
+        <View style={styles.tableSection}>
           <Table
             width="100%"
             style={styles.table}
@@ -184,14 +172,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.cobalt[900],
-    paddingTop: spacing.lg,
-    paddingBottom: spacing.lg,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.md,
   },
   welcomeContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-
   },
   logoContainer: {
     alignItems: 'center',
@@ -205,13 +192,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.lg,
-    paddingVertical: 2, // Reduced from spacing.xs (4px) to 2px
+    paddingVertical: 0,
   },
   buttonContainer: {
     width: '100%',
-    paddingHorizontal: spacing.md, // 16px margins on left and right
+    paddingHorizontal: spacing.md,
     alignItems: 'center',
-    gap: 16, // 16px spacing between buttons
+    gap: spacing.md,
   },
   dateText: {
     fontFamily: 'Blinker_700Bold',
@@ -237,11 +224,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   leftElement: {
-    width: 40, // Fixed width to balance the layout
+    width: 40,
     alignItems: 'flex-start',
   },
   rightElement: {
-    width: 40, // Fixed width to balance the layout
+    width: 40,
     alignItems: 'flex-end',
   },
   instructionsText: {
@@ -251,12 +238,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 0.64,
     textTransform: 'uppercase',
-    flex: 1, // Takes remaining space, centers the text
-  },
-  middleSection: {
     flex: 1,
-    marginTop: 32, // Reduced from 64px to 32px
-    backgroundColor: colors.cobalt[900], // Same as screen background
+  },
+  tableSection: {
+    flex: 1,
+    marginTop: spacing.xl,
+    backgroundColor: colors.cobalt[900],
   },
   table: {
     width: '100%',

@@ -66,10 +66,9 @@ const styles = StyleSheet.create({
     borderRadius: spacing.xs,
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: typography.fontSize.mlg,
   },
   buttonSmall: {
-    width: 'auto', // Will be defined later
+    width: 'auto',
     height: 36,
     paddingHorizontal: spacing.sm,
     gap: spacing.xs,
@@ -88,11 +87,10 @@ const styles = StyleSheet.create({
   },
   buttonPrimary: {
     backgroundColor: colors.cyan[300],
-    // Drop shadow
     shadowColor: colors.cyan[700],
     shadowOffset: {
       width: 0,
-      height: spacing.xs, // 4px
+      height: spacing.xs,
     },
     shadowOpacity: 1,
     shadowRadius: 0,
@@ -102,7 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cobalt[900],
     borderWidth: 2,
     borderColor: colors.cobalt[500],
-    // Drop shadow
     shadowColor: colors.cobalt[500],
     shadowOffset: {
       width: 0,
@@ -113,24 +110,21 @@ const styles = StyleSheet.create({
     elevation: 2, // Android shadow
   },
   buttonPrimaryPressed: {
-    // Remove drop shadow when pressed
     shadowOpacity: 0,
     elevation: 0,
   },
   buttonSecondaryPressed: {
-    // Remove drop shadow when pressed
     shadowOpacity: 0,
     elevation: 0,
   },
   buttonDisabled: {
     backgroundColor: colors.cobalt[500],
     borderWidth: 0,
-    // Remove drop shadow when disabled
     shadowOpacity: 0,
     elevation: 0,
   },
   buttonText: {
-    fontFamily: 'Blinker_700Bold', // Use the specific bold font family
+    fontFamily: 'Blinker_700Bold',
     color: colors.cobalt[900],
     textAlign: 'center',
   },
