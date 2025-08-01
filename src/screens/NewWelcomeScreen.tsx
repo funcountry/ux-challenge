@@ -19,80 +19,63 @@ export default function WelcomeScreen() {
   const { width: screenWidth } = Dimensions.get('window');
 
   // Animation values
-  const logoTranslateY = useSharedValue(0);
   const logoOpacity = useSharedValue(1);
   const textOpacity = useSharedValue(1);
-  const textScale = useSharedValue(1);
   const buttonOpacity = useSharedValue(1);
   const instructionsOpacity = useSharedValue(0);
 
   const handleGetStarted = () => {
-    // Logo flies up and off screen
-    logoTranslateY.value = withSpring(-200, {
-      damping: 15,
-      stiffness: 100,
-    });
+    // Simple fade out for logo
     logoOpacity.value = withTiming(0, {
-      duration: 400,
-      easing: Easing.in(Easing.quad),
-    });
-
-    // Text fades out and shrinks
-    textOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     });
-    textScale.value = withTiming(0.8, {
+
+    // Text fades out
+    textOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     });
 
     // Button fades out
     buttonOpacity.value = withTiming(0, {
-      duration: 100,
+      duration: 200,
       easing: Easing.out(Easing.quad),
     });
 
-    // Instructions fade in after a delay
+    // Instructions fade in
     instructionsOpacity.value = withTiming(1, {
       duration: 200,
-      easing: Easing.inOut(Easing.cubic),
+      easing: Easing.in(Easing.quad),
     }, () => {
       runOnJS(setShowInstructions)(true);
     });
   }
 
   const handleGoBack = () => {
-    // Hide instructions first
+    // Hide instructions
     instructionsOpacity.value = withTiming(0, {
       duration: 200,
       easing: Easing.out(Easing.quad),
     }, () => {
       runOnJS(setShowInstructions)(false);
 
-      logoTranslateY.value = withSpring(0, {
-        damping: 20,
-        stiffness: 90,
-      });
+      // Simple fade in for logo
       logoOpacity.value = withTiming(1, {
-        duration: 100,
-        easing: Easing.out(Easing.quad),
+        duration: 200,
+        easing: Easing.in(Easing.quad),
       });
 
-      // Text fades back in and scales back up
+      // Text fades back in
       textOpacity.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.out(Easing.quad),
-      });
-      textScale.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.out(Easing.quad),
+        duration: 200,
+        easing: Easing.in(Easing.quad),
       });
 
       // Button fades back in
       buttonOpacity.value = withTiming(1, {
-        duration: 300,
-        easing: Easing.out(Easing.quad),
+        duration: 200,
+        easing: Easing.in(Easing.quad),
       });
     });
   }
@@ -111,7 +94,6 @@ export default function WelcomeScreen() {
   // Animated styles
   const logoAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: logoTranslateY.value }],
       opacity: logoOpacity.value,
     };
   });
@@ -119,7 +101,6 @@ export default function WelcomeScreen() {
   const textAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: textOpacity.value,
-      transform: [{ scale: textScale.value }],
     };
   });
 
